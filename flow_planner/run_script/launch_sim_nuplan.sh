@@ -28,6 +28,7 @@ CHALLENGE= # e.g., "closed_loop_nonreactive_agents"
 BRANCH_NAME=flow_planner_release
 CONFIG_FILE= # path of .hydra/config in ckpt folder
 CKPT_FILE= # path to the .pth of checkpoint
+CFG_WEIGHT=1.8
 
 if [ "$SPLIT" == "val14" ]; then
     SCENARIO_BUILDER="nuplan"
@@ -45,6 +46,7 @@ python $NUPLAN_DEVKIT_ROOT/nuplan/planning/script/run_simulation.py \
     planner=$PLANNER \
     planner.flow_planner.config_path=$CONFIG_FILE \
     planner.flow_planner.ckpt_path=$CKPT_FILE \
+    +planner.flow_planner.cfg_weight=$CFG_WEIGHT \
     scenario_builder=$SCENARIO_BUILDER \
     scenario_filter=$SPLIT \
     experiment_uid=$PLANNER/$SPLIT/$BRANCH_NAME/${FILENAME_WITHOUT_EXTENSION}_$(date "+%Y-%m-%d-%H-%M-%S") \
